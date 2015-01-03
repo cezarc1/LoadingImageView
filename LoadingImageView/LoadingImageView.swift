@@ -81,7 +81,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   
   private lazy var displayLink: CADisplayLink = {
     let link = CADisplayLink(target: self, selector: "updateUI")
-    link.frameInterval = 20 // twice every second
+    link.frameInterval = 30 // twice every second
     return link
     }()
 
