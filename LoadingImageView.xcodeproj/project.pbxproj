@@ -83,8 +83,7 @@
 			children = (
 				F749447E1A5666FA00F0D06F /* AppDelegate.swift */,
 				F74944801A5666FA00F0D06F /* ViewController.swift */,
-				F749449E1A56673000F0D06F /* LoadingImageView.swift */,
-				F78CE5B71A57A426007178A9 /* BezierPath.swift */,
+				F7CAE1CB1A585D9D006A614C /* LoadingImageView */,
 				F78CE5B41A573CB7007178A9 /* Storyboard.storyboard */,
 				F74944851A5666FA00F0D06F /* Images.xcassets */,
 				F74944871A5666FA00F0D06F /* LaunchScreen.xib */,
@@ -116,6 +115,15 @@
 				F74944931A5666FA00F0D06F /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F7CAE1CB1A585D9D006A614C /* LoadingImageView */ = {
+			isa = PBXGroup;
+			children = (
+				F749449E1A56673000F0D06F /* LoadingImageView.swift */,
+				F78CE5B71A57A426007178A9 /* BezierPath.swift */,
+			);
+			name = LoadingImageView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
