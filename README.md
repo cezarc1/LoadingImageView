@@ -33,4 +33,4 @@ func downloadImage(URL: NSURL, placeholder:UIImage?)->NSURLSessionDownloadTask
 ####Storyboard, Support for IBInspectable
 
 
-<a href="url"><img src="https://raw.githubusercontent.com/ggamecrazy/LoadingImageView/master/Screenshots/IBInspectableSupport.jpg" width=“200” ></a>
+<a href="url"><img src="https://raw.githubusercontent.com/ggamecrazy/LoadingImageView/master/Screenshots/IBInspectableSupport.jpg" width=“100” ></a>
