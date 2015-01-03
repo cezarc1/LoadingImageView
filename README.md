@@ -7,22 +7,18 @@ Loading Indicator for UIImageView written in Swift.
 - [x] Handles network calls and background image decoding.
 - [x] Background decoding of Images
 - [x] Handles Error states and retrying download.
-- [ ] Handles offline caching
+- [ ] Handles offline caching. Coming soon.
 
 ![demo](https://raw.githubusercontent.com/ggamecrazy/LoadingImageView/master/Screenshots/LoadingImageShowcase.gif)
 
-Code:
-``` swift
-let imageURL = NSURL(string: "https://catfishes.files.wordpress.com/2013/03/cat-breaded.jpg")
-imageView.downloadImage(imageURL, placeholder: nil)
-```
-
 ###USAGE
 
+As simple as
 ``` swift
 let imageView = LoadingImageView()
 view.addSubview(imageView)
-
+let imageURL = NSURL(string: "https://catfishes.files.wordpress.com/2013/03/cat-breaded.jpg")
+imageView.downloadImage(imageURL, placeholder: nil)
 ```
 ####API
 ``` swift
