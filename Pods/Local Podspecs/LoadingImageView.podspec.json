@@ -10,7 +10,7 @@
   },
   "source": {
     "git": "https://github.com/ggamecrazy/LoadingImageView.git",
-    "tag": "0.1.0"
+    "tag": "0.1.1"
   },
   "requires_arc": true,
   "platforms": {
