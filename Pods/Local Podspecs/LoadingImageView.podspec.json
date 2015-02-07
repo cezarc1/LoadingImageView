@@ -1,21 +1,20 @@
 {
   "name": "LoadingImageView",
-  "version": "0.0.1",
+  "version": "0.1.1",
   "license": "MIT",
-  "summary": "Elegant HTTP Networking in Swift",
-  "homepage": "https://github.com/Alamofire/Alamofire",
-  "social_media_url": "http://twitter.com/mattt",
+  "summary": "Loading Indicator for UIImageView, written in Swif",
+  "homepage": "https://github.com/ggamecrazy/LoadingImageView",
+  "social_media_url": "https://twitter.com/ggamecrazy",
   "authors": {
-    "Mattt Thompson": "m@mattt.me"
+    "Cezar Cocu": "me@cezarcocu.com"
   },
   "source": {
-    "git": "https://github.com/Alamofire/Alamofire.git",
-    "branch": "master"
+    "git": "https://github.com/ggamecrazy/LoadingImageView.git",
+    "tag": "0.1.0"
   },
   "requires_arc": true,
   "platforms": {
-    "ios": "8.0",
-    "osx": "10.10"
+    "ios": "8.0"
   },
   "source_files": "Source/*.swift"
 }

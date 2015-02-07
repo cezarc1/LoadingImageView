@@ -9,6 +9,6 @@
 // LoadingImageView
 #define COCOAPODS_POD_AVAILABLE_LoadingImageView
 #define COCOAPODS_VERSION_MAJOR_LoadingImageView 0
-#define COCOAPODS_VERSION_MINOR_LoadingImageView 0
+#define COCOAPODS_VERSION_MINOR_LoadingImageView 1
 #define COCOAPODS_VERSION_PATCH_LoadingImageView 1
 
