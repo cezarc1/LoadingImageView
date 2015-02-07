@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'LoadingImageView'
-  s.version = '0.1.1'
+  s.version = '0.1.2'
   s.license = 'MIT'
   s.summary = 'Loading Indicator for UIImageView, written in Swift'
   s.homepage = 'https://github.com/ggamecrazy/LoadingImageView'

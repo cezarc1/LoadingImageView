@@ -240,16 +240,20 @@ extension LoadingImageView : NSURLSessionDownloadDelegate {
         if downloadTask.state == .Canceling {
           return
         }
+        let delay = 0.20
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+          self.progressLayer.hidden = true
+          self.imageView.image = image
+          self.invalidateIntrinsicContentSize()
+          let fadeInAnimation = CABasicAnimation(keyPath: "opacity")
+          fadeInAnimation.fromValue = 0.0
+          fadeInAnimation.toValue = self.imageView.layer.opacity
+          fadeInAnimation.duration = delay
+          self.imageView.layer.addAnimation(fadeInAnimation, forKey: "fadeIn")
+        }
+        self.updateProgressLayer(forState: self.state, progress: 1.0)
         
-        self.progressLayer.hidden = true
-        self.imageView.image = image
-        self.invalidateIntrinsicContentSize()
-        
-        let fadeInAnimation = CABasicAnimation(keyPath: "opacity")
-        fadeInAnimation.fromValue = 0.0
-        fadeInAnimation.toValue = self.imageView.layer.opacity
-        fadeInAnimation.duration = 0.10
-        self.imageView.layer.addAnimation(fadeInAnimation, forKey: "fadeIn")
       }
     } else {
       dispatch_async(dispatch_get_main_queue()) {
