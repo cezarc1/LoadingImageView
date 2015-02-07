@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: .
 
 SPEC CHECKSUMS:
-  LoadingImageView: 4839b3968fb5e0fc85edc7876abc03fab1074fe0
+  LoadingImageView: 7a75296d1ffd5f3e3133d4e43378447c5ae3c930
 
 COCOAPODS: 0.36.0.beta.2
