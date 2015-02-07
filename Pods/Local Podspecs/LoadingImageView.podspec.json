@@ -1,6 +1,6 @@
 {
   "name": "LoadingImageView",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "license": "MIT",
   "summary": "Loading Indicator for UIImageView, written in Swift",
   "homepage": "https://github.com/ggamecrazy/LoadingImageView",
@@ -10,9 +10,12 @@
   },
   "source": {
     "git": "https://github.com/ggamecrazy/LoadingImageView.git",
-    "tag": "0.1.1"
+    "tag": "0.1.2"
   },
   "requires_arc": true,
+  "ios": {
+    "frameworks": "UIKit"
+  },
   "platforms": {
     "ios": "8.0"
   },
