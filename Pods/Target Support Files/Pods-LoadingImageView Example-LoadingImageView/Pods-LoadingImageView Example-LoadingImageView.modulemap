@@ -1,0 +1,6 @@
+framework module LoadingImageView {
+  umbrella header "Pods-LoadingImageView Example-LoadingImageView-umbrella.h"
+
+  export *
+  module * { export * }
+}
