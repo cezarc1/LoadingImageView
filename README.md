@@ -22,6 +22,8 @@ pod 'LoadingImageView'
 
 As simple as
 ``` swift
+import LoadingImageView
+
 let imageView = LoadingImageView()
 view.addSubview(imageView)
 let imageURL = NSURL(string: "https://catfishes.files.wordpress.com/2013/03/cat-breaded.jpg")
