@@ -97,11 +97,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     }
     return Static.instance
   }
-  
-  public override init() {
-    super.init()
-  }
-  
+
   public override init(frame: CGRect) {
     super.init(frame: frame)
     self.commonInit()
@@ -201,10 +197,10 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
       let maybeAttemptReload = delegate?.shouldAttemptRetry(self)
       if let attemptReload = maybeAttemptReload {
         if attemptReload {
-          self.downloadImage(task.originalRequest.URL, placeholder: nil)
+          self.downloadImage(task.originalRequest.URL!, placeholder: nil)
         }
       } else {
-        self.downloadImage(task.originalRequest.URL, placeholder: nil)
+        self.downloadImage(task.originalRequest.URL!, placeholder: nil)
       }
       fallthrough
     default:
@@ -226,7 +222,7 @@ extension LoadingImageView : NSURLSessionDownloadDelegate {
     dispatch_async(dispatch_get_main_queue()) {
       if let err = error {
         println("error: \(err)")
-        self.state = .Errored(task as NSURLSessionDownloadTask, err)
+        self.state = .Errored(task as! NSURLSessionDownloadTask, err)
       } else {
         self.progress = 1.0
         self.state = .Idle
