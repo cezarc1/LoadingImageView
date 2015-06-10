@@ -114,7 +114,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     addGestureRecognizer(tapGestureRecognizer)
     
     addSubview(imageView)
-    imageView.contentMode = .ScaleAspectFill
+    imageView.contentMode = contentMode
     layer.addSublayer(progressLayer)
   }
   
