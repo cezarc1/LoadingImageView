@@ -86,9 +86,13 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   }()
   
   private lazy var displayLink: CADisplayLink? = {
+    #if !TARGET_INTERFACE_BUILDER
     let link = CADisplayLink(target: self, selector: "updateUI")
     link.frameInterval = 30 // twice every second
     return link
+    #else
+    return nil
+    #endif
     }()
 
   
@@ -115,6 +119,9 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   }
   
   private func commonInit() {
+    #if TARGET_INTERFACE_BUILDER
+    backgroundColor = UIColor.redColor()
+    #else
     clipsToBounds = true
     backgroundColor = UIColor.whiteColor()
     addGestureRecognizer(tapGestureRecognizer)
@@ -122,6 +129,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     addSubview(imageView)
     imageView.contentMode = contentMode
     layer.addSublayer(progressLayer)
+    #endif
   }
   
   //MARK: AutoLayout
