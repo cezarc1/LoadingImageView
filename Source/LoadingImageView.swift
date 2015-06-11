@@ -25,10 +25,14 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
       switch state {
       case .Downloading(_):
         reloadImageView.removeFromSuperview()
-        displayLink.paused = false
-        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        if let link = displayLink {
+          link.paused = false
+          link.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        }
       case .Errored(_, _):
-        displayLink.paused = true
+        if let link = displayLink {
+          link.paused = true
+        }
         progressLayer.hidden = true
         addSubview(reloadImageView)
         if let image = delegate?.imageForReloadState(self) {
@@ -36,7 +40,9 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
         }
       case .Idle:
         reloadImageView.removeFromSuperview()
-        displayLink.paused = true
+        if let link = displayLink {
+          link.paused = true
+        }
       }
     }
   }
@@ -79,7 +85,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     return image
   }()
   
-  private lazy var displayLink: CADisplayLink = {
+  private lazy var displayLink: CADisplayLink? = {
     let link = CADisplayLink(target: self, selector: "updateUI")
     link.frameInterval = 30 // twice every second
     return link
@@ -136,9 +142,14 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     super.didMoveToSuperview()
     
     if let view = superview {
-      displayLink.paused = false
+      if let link = displayLink {
+        link.paused = false
+
+      }
     } else {
-      displayLink.paused = true
+      if let link = displayLink {
+        link.paused = true
+      }
     }
   }
   
@@ -212,7 +223,9 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   }
   
   deinit {
-   displayLink.invalidate()
+    if let link = displayLink {
+      link.invalidate()
+    }
   }
 }
 
