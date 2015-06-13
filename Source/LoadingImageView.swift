@@ -25,10 +25,14 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
       switch state {
       case .Downloading(_):
         reloadImageView.removeFromSuperview()
-        displayLink.paused = false
-        displayLink.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        if let link = displayLink {
+          link.paused = false
+          link.addToRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        }
       case .Errored(_, _):
-        displayLink.paused = true
+        if let link = displayLink {
+          link.paused = true
+        }
         progressLayer.hidden = true
         addSubview(reloadImageView)
         if let image = delegate?.imageForReloadState(self) {
@@ -36,7 +40,9 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
         }
       case .Idle:
         reloadImageView.removeFromSuperview()
-        displayLink.paused = true
+        if let link = displayLink {
+          link.paused = true
+        }
       }
     }
   }
@@ -79,10 +85,14 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     return image
   }()
   
-  private lazy var displayLink: CADisplayLink = {
+  private lazy var displayLink: CADisplayLink? = {
+    #if !TARGET_INTERFACE_BUILDER
     let link = CADisplayLink(target: self, selector: "updateUI")
     link.frameInterval = 30 // twice every second
     return link
+    #else
+    return nil
+    #endif
     }()
 
   
@@ -97,11 +107,7 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     }
     return Static.instance
   }
-  
-  public override init() {
-    super.init()
-  }
-  
+
   public override init(frame: CGRect) {
     super.init(frame: frame)
     self.commonInit()
@@ -113,13 +119,17 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   }
   
   private func commonInit() {
+    #if TARGET_INTERFACE_BUILDER
+    backgroundColor = UIColor.redColor()
+    #else
     clipsToBounds = true
     backgroundColor = UIColor.whiteColor()
     addGestureRecognizer(tapGestureRecognizer)
     
     addSubview(imageView)
-    imageView.contentMode = .ScaleAspectFill
+    imageView.contentMode = contentMode
     layer.addSublayer(progressLayer)
+    #endif
   }
   
   //MARK: AutoLayout
@@ -140,9 +150,14 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
     super.didMoveToSuperview()
     
     if let view = superview {
-      displayLink.paused = false
+      if let link = displayLink {
+        link.paused = false
+
+      }
     } else {
-      displayLink.paused = true
+      if let link = displayLink {
+        link.paused = true
+      }
     }
   }
   
@@ -201,10 +216,10 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
       let maybeAttemptReload = delegate?.shouldAttemptRetry(self)
       if let attemptReload = maybeAttemptReload {
         if attemptReload {
-          self.downloadImage(task.originalRequest.URL, placeholder: nil)
+          self.downloadImage(task.originalRequest.URL!, placeholder: nil)
         }
       } else {
-        self.downloadImage(task.originalRequest.URL, placeholder: nil)
+        self.downloadImage(task.originalRequest.URL!, placeholder: nil)
       }
       fallthrough
     default:
@@ -216,7 +231,9 @@ public final class LoadingImageView : UIView, NSURLSessionDownloadDelegate {
   }
   
   deinit {
-   displayLink.invalidate()
+    if let link = displayLink {
+      link.invalidate()
+    }
   }
 }
 
@@ -226,7 +243,7 @@ extension LoadingImageView : NSURLSessionDownloadDelegate {
     dispatch_async(dispatch_get_main_queue()) {
       if let err = error {
         println("error: \(err)")
-        self.state = .Errored(task as NSURLSessionDownloadTask, err)
+        self.state = .Errored(task as! NSURLSessionDownloadTask, err)
       } else {
         self.progress = 1.0
         self.state = .Idle

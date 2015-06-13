@@ -22,7 +22,7 @@ class ViewController: UITableViewController {
   }
   
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell", forIndexPath: indexPath) as LoadingTableViewCell
+    let cell = tableView.dequeueReusableCellWithIdentifier("loadingCell", forIndexPath: indexPath) as! LoadingTableViewCell
     
     let imageView = LoadingImageView()
     view.addSubview(imageView)
